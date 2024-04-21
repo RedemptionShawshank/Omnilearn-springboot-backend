@@ -1,12 +1,14 @@
 package com.omnilearn.springbootbackend.controller;
 
+import com.omnilearn.springbootbackend.model.PLATFORM_COURSE_LIST;
 import com.omnilearn.springbootbackend.model.TOPIC_LIST;
 import com.omnilearn.springbootbackend.model.User;
+import com.omnilearn.springbootbackend.repository.PlateformCourseListRepository;
 import com.omnilearn.springbootbackend.repository.TopicRepository;
 import com.omnilearn.springbootbackend.repository.UserRepository;
+import com.omnilearn.springbootbackend.service.TopicService;
 import com.omnilearn.springbootbackend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,6 +26,9 @@ public class UserController {
 
     @Autowired
     private TopicRepository topicRepository;
+
+    @Autowired
+    private TopicService topicService;
 
     @GetMapping("/users")
     public List<User> getAllUsers(){
@@ -55,11 +60,13 @@ public class UserController {
 //    }
 
     @PostMapping("/path-variable")
-    public String receiveImageName(@RequestBody String imageName) {
+    public List<PLATFORM_COURSE_LIST> receiveImageName(@RequestBody String imageName) {
         // Process the image name
         System.out.println("Received image name: " + imageName);
+        return topicService.getTopic(imageName);
+
         // Do something with the image name (e.g., save to database)
-        return "received";
+       // return "received";
     }
 
 

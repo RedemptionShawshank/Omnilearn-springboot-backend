@@ -41,6 +41,9 @@ public class PLATFORM_COURSE_LIST {
         this.imagePath = imagePath;
         this.rating = rating;
     }
+    public PLATFORM_COURSE_LIST(){
+
+    }
 
     public long getId() {
         return id;
