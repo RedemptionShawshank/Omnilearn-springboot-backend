@@ -27,9 +27,9 @@ public class UserService {
 
     }
 
-    public void getTopics(){
-
-
+    public boolean isEmailExists(String emailId) {
+        User user = userRepository.findByemailId(emailId);
+        return user != null;
     }
 
 }

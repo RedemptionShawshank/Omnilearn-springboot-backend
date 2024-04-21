@@ -27,7 +27,7 @@ public class User {
         super();
         this.username = username;
         this.password = password;
-        this.emailId = emailId;
+        this.emailId= emailId;
     }
 
     public String getUsername() {
