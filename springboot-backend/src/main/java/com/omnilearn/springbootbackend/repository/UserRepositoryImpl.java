@@ -11,9 +11,14 @@ public class UserRepositoryImpl{
     @Autowired
      EntityManager entityManager;
 
+
     public  User getUser(long i){
         Session session=entityManager.unwrap(Session.class);
         return session.get(User.class,i);
     }
+
+
+
+
 
 }

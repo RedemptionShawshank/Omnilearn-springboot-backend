@@ -10,12 +10,13 @@ import com.omnilearn.springbootbackend.service.TopicService;
 import com.omnilearn.springbootbackend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:4200")
 //@CrossOrigin(origins = {"http://localhost:4200","http://localhost:4200/courses/DSA"})
 public class UserController {
 
@@ -67,6 +68,30 @@ public class UserController {
 
         // Do something with the image name (e.g., save to database)
        // return "received";
+    }
+
+    // rest api for getting user info from angular app and saving it into database
+    @PostMapping("/userInfo")
+    public User addUserInfo(@RequestBody User user){
+        String password = user.getPassword();
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String hashedPassword = encoder.encode(password);
+        user.setPassword(hashedPassword);
+
+        String emailId = user.getEmailId();
+        boolean check= userService.isEmailExists(emailId);
+        System.out.println("email find: "+ check);
+
+        return userRepository.save(user);
+    }
+
+    @PostMapping("/loginInfo")
+    public Object loggingIN(@RequestBody Object loginInfo){
+
+        System.out.println("received login info: "+ loginInfo);
+
+        return loginInfo;
+
     }
 
 
