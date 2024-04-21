@@ -46,12 +46,20 @@ public class UserController {
 //        // Process the data received from the frontend
 //        return "received";
 //    }
+//    @PostMapping("/path-variable")
+//    public ResponseEntity<String> receiveImageName(@RequestBody String imageName) {
+//        // Process the image name
+//        System.out.println("Received image name: " + imageName);
+//        // Do something with the image name (e.g., save to database)
+//        return ResponseEntity.ok("Image name received: " + imageName);
+//    }
+
     @PostMapping("/path-variable")
-    public ResponseEntity<String> receiveImageName(@RequestBody String imageName) {
+    public String receiveImageName(@RequestBody String imageName) {
         // Process the image name
         System.out.println("Received image name: " + imageName);
         // Do something with the image name (e.g., save to database)
-        return ResponseEntity.ok("Image name received: " + imageName);
+        return "received";
     }
 
 
