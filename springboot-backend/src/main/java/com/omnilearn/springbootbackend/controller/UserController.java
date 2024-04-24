@@ -12,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -72,25 +74,38 @@ public class UserController {
 
     // rest api for getting user info from angular app and saving it into database
     @PostMapping("/userInfo")
-    public User addUserInfo(@RequestBody User user){
-        String password = user.getPassword();
+    public String addUserInfo(@RequestBody User user){
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        String hashedPassword = encoder.encode(password);
+        String hashedPassword = encoder.encode(user.getPassword());
         user.setPassword(hashedPassword);
 
-        String emailId = user.getEmailId();
-        boolean check= userService.isEmailExists(emailId);
-        System.out.println("email find: "+ check);
+        User check= userService.isEmailExists(user.getEmailId());
 
-        return userRepository.save(user);
+        if(check == null){
+            userRepository.save(user);
+            return "Account created successfully";
+        }
+        else{
+            return "Account Already Exists";
+        }
+
     }
 
     @PostMapping("/loginInfo")
-    public Object loggingIN(@RequestBody Object loginInfo){
+    public User loggingIN(@RequestBody LinkedHashMap<String,String> loginInfo){
 
-        System.out.println("received login info: "+ loginInfo);
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-        return loginInfo;
+        User check = userService.isEmailExists(loginInfo.get("emailId"));
+
+        if(encoder.matches(loginInfo.get("password"),check.getPassword())){
+            System.out.println("Authorized user");
+            check.setPassword(null);
+            return check;
+        }
+        else{
+            return null;
+        }
 
     }
 

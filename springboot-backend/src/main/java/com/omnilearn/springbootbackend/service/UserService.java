@@ -23,13 +23,18 @@ public class UserService {
             System.out.println(user.getId());
             System.out.println(user.getUsername());
         }
-       // User user= userRepositoryImpl.getUser();
 
     }
 
-    public boolean isEmailExists(String emailId) {
+    public User isEmailExists(String emailId) {
         User user = userRepository.findByemailId(emailId);
-        return user != null;
+
+        if(user!=null){
+            return user;
+        }
+        else{
+            return null;
+        }
     }
 
 }
