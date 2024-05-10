@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class UserService {
     @Autowired
@@ -23,13 +25,28 @@ public class UserService {
             System.out.println(user.getId());
             System.out.println(user.getUsername());
         }
-       // User user= userRepositoryImpl.getUser();
 
     }
 
-    public boolean isEmailExists(String emailId) {
+    public User isEmailExists(String emailId) {
         User user = userRepository.findByemailId(emailId);
-        return user != null;
+
+        if(user!=null){
+            return user;
+        }
+        else{
+            return null;
+        }
+    }
+
+    public List<User> getAllusers(){
+
+        return userRepositoryImpl.getAllUsers();
+
+    }
+
+    public List<User> findAllUsers(){
+        return userRepository.findAll();
     }
 
 }
