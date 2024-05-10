@@ -69,11 +69,18 @@ public class UserController {
        // return "received";
     }
 
-    @PostMapping("/user-name")
+    @PostMapping("/favList")
     public List<Favorite> receivedUserName(@RequestBody UserFav body){
 
         System.out.println("received user name: " + body.getUserName() + " " + body.getTopicName());
         List<Favorite> favorites = favouriteService.getFavoriteList(body.getUserName(),body.getTopicName());
+        return favorites;
+    }
+
+    @PostMapping("/userFavlist")
+    public List<Favorite> getFavouriteListByUsername(@RequestBody String userName){
+
+        List<Favorite> favorites = favouriteService.getFavoriteListByUsername(userName);
         return favorites;
     }
 

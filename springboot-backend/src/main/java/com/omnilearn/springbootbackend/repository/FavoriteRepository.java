@@ -11,6 +11,7 @@ public interface FavoriteRepository extends JpaRepository<Favorite,Long> {
 
 //    List<Favorite> findByuserNameandtopicName(String userName,String topicName);
     Favorite findByCourseId(Integer courseId);
+    List<Favorite> findByuserName(String userName);
 
     void deleteBycourseId(Integer courseId);
 }

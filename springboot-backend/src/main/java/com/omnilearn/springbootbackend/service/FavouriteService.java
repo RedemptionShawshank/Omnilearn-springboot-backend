@@ -27,6 +27,10 @@ public class FavouriteService {
 
     }
 
+    public List<Favorite> getFavoriteListByUsername(String username){
+        return favoriteRepository.findByuserName(username);
+    }
+
     public List<Favorite> addfavourite(Favorite favorite){
         favoriteRepository.save(favorite);
         return favoriteRepository.findAll();
