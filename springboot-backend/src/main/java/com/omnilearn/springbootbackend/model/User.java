@@ -18,6 +18,13 @@ public class User {
     @Column(name = "email_id")
     private String emailId;
 
+    @Column(name="name")
+    private String name;
+
+    @Column(name="college")
+    private String college;
+    @Column(name="company")
+    private String company;
     //also create a default contructor
     public User(){
 
@@ -28,6 +35,9 @@ public class User {
         this.username = username;
         this.password = password;
         this.emailId= emailId;
+        this.college=college;
+        this.name=name;
+        this.company=company;
     }
 
     public String getUsername() {
@@ -52,6 +62,30 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCollege() {
+        return college;
+    }
+
+    public void setCollege(String college) {
+        this.college = college;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
     }
 
     public String getEmailId() {
