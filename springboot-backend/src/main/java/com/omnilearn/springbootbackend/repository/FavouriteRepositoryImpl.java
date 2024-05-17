@@ -29,4 +29,21 @@ public class FavouriteRepositoryImpl {
         return allList;
 
     }
+
+    public boolean isCourseExistsForUser(String userName,Integer courseId){
+
+        Session session = entityManager.unwrap(Session.class);
+
+        List<Favorite> fav = session.createQuery("SELECT f FROM Favorite f WHERE f.userName = :userName AND f.courseId = :courseId",Favorite.class)
+                .setParameter("userName", userName)
+                .setParameter("courseId", courseId)
+                .getResultList();
+
+        if(fav.size()==0){
+            return false;
+        }
+
+        return true;
+
+    }
 }

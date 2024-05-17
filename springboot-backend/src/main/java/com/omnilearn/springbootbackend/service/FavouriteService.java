@@ -41,15 +41,12 @@ public class FavouriteService {
         return favoriteRepository.findAll();
     }
 
-    public Favorite isCourseIdExists(Integer courseId) {
-        Favorite favorite = favoriteRepository.findByCourseId(courseId);
+    public boolean isCourseFavouriteForUser(String userName,Integer courseId) {
+        if(favouriteRepositoryImpl.isCourseExistsForUser(userName,courseId)){
+            return true;
+        }
+        return false;
 
-        if(favorite!=null){
-            return favorite;
-        }
-        else{
-            return null;
-        }
     }
 
     @Transactional

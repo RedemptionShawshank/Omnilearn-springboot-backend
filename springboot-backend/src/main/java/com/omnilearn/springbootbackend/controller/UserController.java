@@ -18,7 +18,7 @@ import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/v1")
-@CrossOrigin(origins = "https://omnilearn.vercel.app")
+@CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
 
     @Autowired
@@ -42,12 +42,6 @@ public class UserController {
         List<User> u = userService.getAllusers();
 
 
-
-        for(int i=0;i<u.size();i++){
-            User u1 = u.get(i);
-            System.out.println(u1.getUsername() + ' ' + u1.getId());
-        }
-
         return u; //implement all these functions in service class
     }
 
@@ -69,39 +63,8 @@ public class UserController {
        // return "received";
     }
 
-    @PostMapping("/favList")
-    public List<Favorite> receivedUserName(@RequestBody UserFav body){
-
-        System.out.println("received user name: " + body.getUserName() + " " + body.getTopicName());
-        List<Favorite> favorites = favouriteService.getFavoriteList(body.getUserName(),body.getTopicName());
-        return favorites;
-    }
-
-    @PostMapping("/userFavlist")
-    public List<Favorite> getFavouriteListByUsername(@RequestBody String userName){
-
-        List<Favorite> favorites = favouriteService.getFavoriteListByUsername(userName);
-        return favorites;
-    }
-
-    @PostMapping("/addFavourite")
-    public List<Favorite> addFavourite(@RequestBody Favorite favourite){
 
 
-        Favorite check = favouriteService.isCourseIdExists(favourite.getCourseId());
-
-        if(check == null){
-            return favouriteService.addfavourite(favourite);
-        }
-        else{
-            return favouriteService.getFavouriteList();
-        }
-    }
-
-    @DeleteMapping("/remove/{courseId}")
-    public void removeFavourite(@PathVariable Integer courseId){
-        favouriteService.removeFavourite(courseId);
-    }
 
     // rest api for getting user info from angular app and saving it into database
     @PostMapping("/userInfo")
