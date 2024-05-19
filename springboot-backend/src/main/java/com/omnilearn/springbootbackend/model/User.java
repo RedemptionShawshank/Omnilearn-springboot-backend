@@ -1,6 +1,10 @@
 package com.omnilearn.springbootbackend.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name="users")
@@ -25,6 +29,37 @@ public class User {
     private String college;
     @Column(name="company")
     private String company;
+    @Column(name="active")
+    private boolean active;
+    @Column(name="otp")
+    private String otp;
+
+    public LocalDateTime getOTpGeneratedTime() {
+        return OtpGeneratedTime;
+    }
+
+    public void setOTpGeneratedTime(LocalDateTime tpGeneratedTime) {
+        this.OtpGeneratedTime = tpGeneratedTime;
+    }
+
+    @Column
+    private LocalDateTime OtpGeneratedTime;
+    public boolean isActive() {
+        return active;
+    }
+
+    public String getOtp() {
+        return otp;
+    }
+
+    public void setOtp(String otp) {
+        this.otp = otp;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
     //also create a default contructor
     public User(){
 
@@ -38,6 +73,8 @@ public class User {
         this.college=college;
         this.name=name;
         this.company=company;
+        this.otp=otp;
+        this.active=false;
     }
 
     public String getUsername() {

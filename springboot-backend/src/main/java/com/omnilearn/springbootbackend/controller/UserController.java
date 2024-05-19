@@ -1,20 +1,20 @@
 package com.omnilearn.springbootbackend.controller;
 
+import com.omnilearn.springbootbackend.Dto.RegisterDto;
 import com.omnilearn.springbootbackend.model.*;
-import com.omnilearn.springbootbackend.repository.PlateformCourseListRepository;
 import com.omnilearn.springbootbackend.repository.TopicRepository;
 import com.omnilearn.springbootbackend.repository.UserRepository;
 import com.omnilearn.springbootbackend.service.FavouriteService;
 import com.omnilearn.springbootbackend.service.TopicService;
 import com.omnilearn.springbootbackend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -97,11 +97,43 @@ public class UserController {
             check.setPassword(null);
             return check;
         }
+        else if(!check.isActive())
+            return null;
         else{
             return null;
         }
 
     }
+    @PutMapping("/forget-password")
+    public String forgetPassword(@RequestBody LinkedHashMap<String,String> body){
+        User check = userService.isEmailExists(body.get("emailId"));
+        if(check==null)
+            return "Email id not present";
+        else {
+            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+            String newHashedPassword = encoder.encode(body.get("password"));
+            String emailId=body.get("emailId");
+            userService.updatePassword(emailId,newHashedPassword);
+            return "Password Changed Successfully";
 
+
+        }
+
+    }
+    @PostMapping("/register")
+    public ResponseEntity<String> register(@RequestBody RegisterDto registerDto){
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String hashedPassword = encoder.encode(registerDto.getPassword());
+        registerDto.setPassword(hashedPassword);
+        return new ResponseEntity<>(userService.register(registerDto), HttpStatus.OK);
+    }
+    @PutMapping("/verify-account")
+    public ResponseEntity<String>verifyAccount(@RequestParam String email,@RequestParam String otp){
+        return new ResponseEntity<>(userService.verifyAccount(email,otp),HttpStatus.OK);
+    }
+    @PutMapping("/regenerate-otp")
+    public ResponseEntity<String> RegenrateOtp(@RequestParam String email){
+        return new ResponseEntity<>(userService.regenrateOtp(email),HttpStatus.OK);
+    }
 
 }
