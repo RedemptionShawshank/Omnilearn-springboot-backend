@@ -18,7 +18,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1")
-//@CrossOrigin(origins = "https://omnilearn.vercel.app")
+@CrossOrigin(origins = "https://omnilearn.vercel.app")
 public class UserController {
 
     @Autowired
