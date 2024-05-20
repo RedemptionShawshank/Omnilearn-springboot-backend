@@ -39,7 +39,7 @@ public class UserService {
     }
 
     public User isEmailExists(String emailId) {
-        User user = userRepository.findByemailId(emailId).orElseThrow(()->new RuntimeException("User not found with this email"+emailId));
+        User user = userRepository.findByemailId(emailId);
 
         if(user!=null){
             return user;
@@ -61,7 +61,7 @@ public class UserService {
 
 
     public void updatePassword(String emailId, String newHashedPassword) {
-       User user= userRepository.findByemailId(emailId).orElseThrow(()->new RuntimeException("User not found with this email"+emailId));
+       User user= userRepository.findByemailId(emailId);
        user.setPassword(newHashedPassword);
        userRepository.save(user);
     }
@@ -87,8 +87,7 @@ public class UserService {
     }
 
     public String verifyAccount(String emailId, String otp) {
-        User user=userRepository.findByemailId(emailId)
-                .orElseThrow(()->new RuntimeException("User not found with this email:"+emailId));
+        User user=userRepository.findByemailId(emailId);
         if(user.getOtp().equals(otp) && Duration.between(user.getOTpGeneratedTime(),LocalDateTime.now()).getSeconds()<5*60)
         {
             user.setActive(true);
@@ -100,8 +99,7 @@ public class UserService {
     }
 
     public String regenrateOtp(String emailId) {
-        User user=userRepository.findByemailId(emailId)
-                .orElseThrow(()->new RuntimeException("User not found with this email:"+emailId));
+        User user=userRepository.findByemailId(emailId);
         String otp=otpUtils.generateOtp();
         try {
             emailUtils.sendOtpEmail(emailId,otp);
@@ -112,7 +110,5 @@ public class UserService {
         user.setOTpGeneratedTime(LocalDateTime.now());
         userRepository.save(user);
         return "Email Sent... Please verify account within 5 minutes";
-
-
     }
 }
