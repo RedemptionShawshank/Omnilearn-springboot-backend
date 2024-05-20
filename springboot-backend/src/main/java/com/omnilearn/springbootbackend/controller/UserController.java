@@ -19,6 +19,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1")
 @CrossOrigin(origins = "https://omnilearn.vercel.app")
+//@CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
 
     @Autowired
@@ -67,23 +68,23 @@ public class UserController {
 
 
     // rest api for getting user info from angular app and saving it into database
-    @PostMapping("/userInfo")
-    public String addUserInfo(@RequestBody User user){
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        String hashedPassword = encoder.encode(user.getPassword());
-        user.setPassword(hashedPassword);
-
-        User check= userService.isEmailExists(user.getEmailId());
-
-        if(check == null){
-            userRepository.save(user);
-            return "Account created successfully";
-        }
-        else{
-            return "Account Already Exists";
-        }
-
-    }
+//    @PostMapping("/userInfo")
+//    public String addUserInfo(@RequestBody User user){
+//        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+//        String hashedPassword = encoder.encode(user.getPassword());
+//        user.setPassword(hashedPassword);
+//
+//        User check= userService.isEmailExists(user.getEmailId());
+//
+//        if(check == null){
+//            userRepository.save(user);
+//            return "Account created successfully";
+//        }
+//        else{
+//            return "Account Already Exists";
+//        }
+//
+//    }
 
     @PostMapping("/loginInfo")
     public User loggingIN(@RequestBody LinkedHashMap<String,String> loginInfo){
@@ -122,10 +123,15 @@ public class UserController {
     }
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody RegisterDto registerDto){
+
+        User check= userService.isEmailExists(registerDto.getEmailId());
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String hashedPassword = encoder.encode(registerDto.getPassword());
         registerDto.setPassword(hashedPassword);
-        return new ResponseEntity<>(userService.register(registerDto), HttpStatus.OK);
+        if(check == null){
+            userService.register(registerDto);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
     }
     @PutMapping("/verify-account")
     public ResponseEntity<String>verifyAccount(@RequestParam String email,@RequestParam String otp){

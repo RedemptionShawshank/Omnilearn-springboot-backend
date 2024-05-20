@@ -8,6 +8,16 @@ public class RegisterDto {
     private String emailId;
     private String name;
 
+    private String username;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -34,12 +44,13 @@ public class RegisterDto {
 
     private String college;
 
-    public RegisterDto(String password, String emailId, String name, String college, String company) {
+    public RegisterDto(String password, String emailId, String name, String college, String company,String username) {
         this.password = password;
         this.emailId = emailId;
         this.name = name;
         this.college = college;
         this.company = company;
+        this.username = username;
     }
 
     private String company;
