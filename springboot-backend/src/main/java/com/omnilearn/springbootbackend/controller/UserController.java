@@ -133,13 +133,19 @@ public class UserController {
         }
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+
     @PutMapping("/verify-account")
-    public ResponseEntity<String>verifyAccount(@RequestParam String email,@RequestParam String otp){
-        return new ResponseEntity<>(userService.verifyAccount(email,otp),HttpStatus.OK);
+//    ResponseEntity<String>
+    public String verifyAccount(@RequestBody OTPverification otpverification){
+//        return new ResponseEntity<>(userService.verifyAccount(otpverification.getEmail(),otpverification.getOtp()),HttpStatus.OK);
+        return userService.verifyAccount(otpverification.getEmail(),otpverification.getOtp());
     }
     @PutMapping("/regenerate-otp")
-    public ResponseEntity<String> RegenrateOtp(@RequestParam String email){
-        return new ResponseEntity<>(userService.regenrateOtp(email),HttpStatus.OK);
+    public String RegenrateOtp(@RequestBody String email){
+        return userService.regenrateOtp(email);
+
+//        return new ResponseEntity<>(userService.regenrateOtp(email),HttpStatus.OK);
     }
 
 }
