@@ -78,6 +78,7 @@ public class UserService {
         user.setCollege(registerDto.getCollege());
         user.setCompany(registerDto.getCompany());
         user.setPassword(registerDto.getPassword());
+        user.setUsername(registerDto.getUsername());
         user.setOtp(otp);
         user.setOTpGeneratedTime(LocalDateTime.now());
         userRepository.save(user);
@@ -92,9 +93,9 @@ public class UserService {
         {
             user.setActive(true);
             userRepository.save(user);
-            return "Otp Verified , now login";
+            return "Verified";
         }
-        return "Please regenrate otp and try again";
+        return "notVerified";
 
     }
 
@@ -109,6 +110,6 @@ public class UserService {
         user.setOtp(otp);
         user.setOTpGeneratedTime(LocalDateTime.now());
         userRepository.save(user);
-        return "Email Sent... Please verify account within 5 minutes";
+        return "Sent";
     }
 }

@@ -13,11 +13,9 @@ public class EmailUtils {
     @Autowired
     JavaMailSender javaMailSender;
     public void sendOtpEmail(String email, String otp) throws MessagingException {
-//        SimpleMailMessage simpleMailMessage=new SimpleMailMessage();
-//        simpleMailMessage.setTo(email);
-//        simpleMailMessage.setSubject("Verify Otp");
-//        simpleMailMessage.setText("Hello your otp is"+otp);
+
         MimeMessage mimeMessage=javaMailSender.createMimeMessage();
+        mimeMessage.setFrom("omnilearn56@gmail.com");
         MimeMessageHelper mimeMessageHelper=new MimeMessageHelper(mimeMessage);
         String emailBody = String.format("""
             <div>
@@ -30,14 +28,27 @@ public class EmailUtils {
         mimeMessageHelper.setTo(email);
         mimeMessageHelper.setSubject("verify Otp");
         mimeMessageHelper.setText(
-//"""
-//                <div>
-//                <a href="http://localhost:8080/api/v1/verify-account?email=%s&otp=%s" target="_blank">click link to verify</a>
-//                </div>
-//
-//                """.formatted(email,otp)
                 emailBody,true);
         javaMailSender.send(mimeMessage);
 
     }
+
+//    public void sendOtpEmail(String email,String otp) throws MessagingException{
+//        SimpleMailMessage message = new SimpleMailMessage();
+//        message.setFrom("omnilearn56@gmail.com"); // Ensure this matches your configured email address
+//        message.setTo(email);
+//        message.setSubject("verify Otp");
+//
+//        String emailBody = String.format("""
+//            <div>
+//                <p>Hello,</p>
+//                <p>Your OTP for verification is: <strong>%s</strong></p>
+//                <p>Please click the following link to verify your account:</p>
+//                <a href="http://localhost:8080/api/v1/verify-account?email=%s&otp=%s" target="_blank">Verify Account</a>
+//            </div>
+//            """, otp, email, otp);
+//
+//        message.setText(emailBody);
+//        javaMailSender.send(message);
+//    }
 }

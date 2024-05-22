@@ -16,8 +16,8 @@ import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/v1")
-//@CrossOrigin(origins = "https://omnilearn.vercel.app")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "https://omnilearn.vercel.app")
+//@CrossOrigin(origins = "http://localhost:4200")
 public class FavoriteController {
 
     @Autowired
