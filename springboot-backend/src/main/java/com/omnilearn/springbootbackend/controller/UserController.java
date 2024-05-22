@@ -53,6 +53,13 @@ public class UserController {
 
     }
 
+    @PostMapping("/addCourses")
+    public String addCourses(@RequestBody List<Object> rows){
+
+        return topicService.addCourses(rows);
+
+    }
+
 
     @PostMapping("/path-variable")
     public List<PLATFORM_COURSE_LIST> receiveImageName(@RequestBody String imageName) {
@@ -93,12 +100,12 @@ public class UserController {
 
         User check = userService.isEmailExists(loginInfo.get("emailId"));
 
-        if(encoder.matches(loginInfo.get("password"),check.getPassword())){
+        if(check!=null && encoder.matches(loginInfo.get("password"),check.getPassword())){
             System.out.println("Authorized user");
             check.setPassword(null);
             return check;
         }
-        else if(!check.isActive())
+        else if(check!=null && !check.isActive())
             return null;
         else{
             return null;
