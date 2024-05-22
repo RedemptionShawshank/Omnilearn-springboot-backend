@@ -21,8 +21,6 @@ public class EmailUtils {
             <div>
                 <p>Hello,</p>
                 <p>Your OTP for verification is: <strong>%s</strong></p>
-                <p>Please click the following link to verify your account:</p>
-                <a href="http://localhost:8080/api/v1/verify-account?email=%s&otp=%s" target="_blank">Verify Account</a>
             </div>
             """, otp, email, otp);
         mimeMessageHelper.setTo(email);
