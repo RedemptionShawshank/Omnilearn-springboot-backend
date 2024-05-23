@@ -36,15 +36,6 @@ public class UserController {
     @Autowired
     private FavouriteService favouriteService;
 
-    @GetMapping("/users")
-    public List<User> getAllUsers(){
-
-//        List<User> u = userService.findAllUsers();
-        List<User> u = userService.getAllusers();
-
-
-        return u; //implement all these functions in service class
-    }
 
     @GetMapping("/topic_list")
     public List<TOPIC_LIST> getTopicList(){
@@ -64,7 +55,6 @@ public class UserController {
     @PostMapping("/path-variable")
     public List<PLATFORM_COURSE_LIST> receiveImageName(@RequestBody String imageName) {
         // Process the image name
-        System.out.println("Received image name: " + imageName);
         return topicService.getTopic(imageName);
 
         // Do something with the image name (e.g., save to database)

@@ -16,8 +16,8 @@ import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/v1")
-@CrossOrigin(origins = "https://omnilearn.vercel.app")
-//@CrossOrigin(origins = "http://localhost:4200")
+//@CrossOrigin(origins = "https://omnilearn.vercel.app")
+@CrossOrigin(origins = "http://localhost:4200")
 public class FavoriteController {
 
     @Autowired
@@ -34,7 +34,6 @@ public class FavoriteController {
     @PostMapping("/favList")
     public List<Favorite> receivedUserName(@RequestBody UserFav body){
 
-        System.out.println("received user name: " + body.getUserName() + " " + body.getTopicName());
         List<Favorite> favorites = favouriteService.getFavoriteList(body.getUserName(),body.getTopicName());
         return favorites;
     }

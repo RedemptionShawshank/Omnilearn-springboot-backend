@@ -23,19 +23,15 @@ public class TopicService {
 
     @Transactional
     public List<PLATFORM_COURSE_LIST> getTopic(String imageName){
-        List<PLATFORM_COURSE_LIST>topicArray=new ArrayList<>();
-        long count =plateformCourseListRepository.count();
-       // System.out.println(count);
-        for(long i=1;i<=count;i++){
-            PLATFORM_COURSE_LIST topic=plateformCourseListRepositoryImpl.getTopic(i);
-           // System.out.println(topic.getTopicName());
-            if(topic.getTopicName().equals(imageName))
-            {
-                topicArray.add(topic);
-//                System.out.println(topic.getPlatformName());
-            }
-        }
-        return topicArray;
+
+//        for(long i=1;i<=count;i++){
+//            PLATFORM_COURSE_LIST topic=plateformCourseListRepositoryImpl.getTopic(i);
+//            if(topic.getTopicName().equals(imageName))
+//            {
+//                topicArray.add(topic);
+//            }
+//        }
+        return plateformCourseListRepository.getBytopicName(imageName);
     }
 
     public String addCourses(List<Object> rows){
