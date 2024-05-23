@@ -11,4 +11,5 @@ Tasks:
 10. adjust hamburger menu location accordingly
 11. check whether the entered email for creating account follows the correct pattern
 12. update left bar content in profile page, remove wallet, add functionality for edit user's information
-13. 
+13. configure forgot password
+14. check wrong password
