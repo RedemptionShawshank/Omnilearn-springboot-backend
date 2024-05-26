@@ -1,6 +1,7 @@
 package com.omnilearn.springbootbackend.service;
 
 import com.omnilearn.springbootbackend.model.PLATFORM_COURSE_LIST;
+import com.omnilearn.springbootbackend.model.TOPIC_LIST;
 import com.omnilearn.springbootbackend.repository.PlateformCourseListRepository;
 import com.omnilearn.springbootbackend.repository.PlateformCourseListRepositoryImpl;
 import com.omnilearn.springbootbackend.repository.TopicRepository;
@@ -20,6 +21,9 @@ public class TopicService {
     @Autowired
     PlateformCourseListRepository plateformCourseListRepository;
 
+    @Autowired
+    TopicRepository topicRepository;
+
 
     @Transactional
     public List<PLATFORM_COURSE_LIST> getTopic(String imageName){
@@ -32,6 +36,12 @@ public class TopicService {
 //            }
 //        }
         return plateformCourseListRepository.getBytopicName(imageName);
+    }
+
+    public List<TOPIC_LIST> getTopicBytype(String type){
+
+        return topicRepository.findBytype(type);
+
     }
 
     public String addCourses(List<Object> rows){

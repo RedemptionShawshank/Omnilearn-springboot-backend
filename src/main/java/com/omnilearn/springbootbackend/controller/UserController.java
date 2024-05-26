@@ -44,6 +44,13 @@ public class UserController {
 
     }
 
+    @GetMapping("/{type}")
+    public List<TOPIC_LIST> getTopicByType(@PathVariable String type){
+
+        return topicService.getTopicBytype(type);
+
+    }
+
     @PostMapping("/addCourses")
     public String addCourses(@RequestBody List<Object> rows){
 

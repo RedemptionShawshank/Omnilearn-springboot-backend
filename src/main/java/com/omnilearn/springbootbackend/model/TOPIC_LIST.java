@@ -16,13 +16,21 @@ public class TOPIC_LIST {
     @Column(name = "IMAGE_PATH")
     private String imagePath;
 
+    @Column(name = "TYPE")
+    private String type;
+
+    @Column(name = "DESCRIPTION")
+    private String description;
+
     public TOPIC_LIST(){
 
     }
-    public TOPIC_LIST(String topicName, String imagePath) {
+    public TOPIC_LIST(String topicName, String imagePath,String type,String description) {
         super();
         this.topicName = topicName;
         this.imagePath = imagePath;
+        this.type = type;
+        this.description = description;
     }
 
     public long getId() {
@@ -47,5 +55,21 @@ public class TOPIC_LIST {
 
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
