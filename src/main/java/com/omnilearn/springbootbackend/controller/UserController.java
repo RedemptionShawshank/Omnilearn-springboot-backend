@@ -44,7 +44,7 @@ public class UserController {
 
     }
 
-    @GetMapping("/topic/{type}")
+    @GetMapping("/type/{type}")
     public List<TOPIC_LIST> getTopicByType(@PathVariable String type){
 
         return topicService.getTopicBytype(type);
