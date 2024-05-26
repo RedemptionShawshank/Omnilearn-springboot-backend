@@ -51,7 +51,7 @@ public class UserController {
 
     }
     @GetMapping("/id/{id}")
-    public String getById(@PathVariable String id){
+    public String getById(@PathVariable("id") String id){
         return "OK";
     }
 
