@@ -50,6 +50,11 @@ public class UserController {
         return topicService.getTopicBytype(type);
 
     }
+    @GetMapping("/id/{id}")
+    public String getById(@PathVariable String id){
+        return "OK";
+    }
+
 
     @PostMapping("/addCourses")
     public String addCourses(@RequestBody List<Object> rows){
