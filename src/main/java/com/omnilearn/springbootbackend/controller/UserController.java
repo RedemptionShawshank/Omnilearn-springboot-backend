@@ -118,6 +118,7 @@ public class UserController {
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
             String newHashedPassword = encoder.encode(body.get("password"));
             String emailId=body.get("emailId");
+
             userService.updatePassword(emailId,newHashedPassword);
             return "Password Changed Successfully";
 
@@ -150,6 +151,15 @@ public class UserController {
         return userService.regenrateOtp(email);
 
 //        return new ResponseEntity<>(userService.regenrateOtp(email),HttpStatus.OK);
+    }
+
+    @GetMapping("/emailCheck/{emailId}")
+    public boolean emailCheck(@PathVariable String emailId){
+        User check = userService.isEmailExists(emailId);
+        if(check==null){
+            return false;
+        }
+        return true;
     }
 
 }
