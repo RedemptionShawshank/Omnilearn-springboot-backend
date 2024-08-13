@@ -5,11 +5,13 @@ import com.omnilearn.springbootbackend.repository.PlateformCourseListRepository;
 import com.omnilearn.springbootbackend.service.FavouriteService;
 import com.omnilearn.springbootbackend.service.TopicService;
 import com.omnilearn.springbootbackend.service.UserService;
+import com.omnilearn.springbootbackend.service.YouTubeSearch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Objects;
@@ -29,6 +31,9 @@ public class FavoriteController {
 
     @Autowired
     private FavouriteService favouriteService;
+
+    @Autowired
+    private YouTubeSearch youTubeSearch;
 
 
     @PostMapping("/favList")
@@ -62,6 +67,13 @@ public class FavoriteController {
     @DeleteMapping("/remove/{courseId}")
     public void removeFavourite(@PathVariable Integer courseId){
         favouriteService.removeFavourite(courseId);
+    }
+
+    @PostMapping("/addYoutubeCourses")
+    public String courseAddition(@RequestBody HashMap<String,String>input){
+
+        return youTubeSearch.addCourse(input.get("searchQuery"),input.get("topicName"));
+
     }
 
 
