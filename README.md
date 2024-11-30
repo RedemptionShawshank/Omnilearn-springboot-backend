@@ -1,4 +1,4 @@
-**Omnilearn-springboot-backend**
+# Omnilearn-springboot-backend
 
 This the Java - Spring boot backend of project Omnilearn.
 
