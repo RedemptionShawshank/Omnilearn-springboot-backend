@@ -37,6 +37,7 @@ public class UserController {
     private FavouriteService favouriteService;
 
 
+    // to get list of the topics
     @GetMapping("/topic_list")
     public List<TOPIC_LIST> getTopicList(){
 
@@ -44,6 +45,7 @@ public class UserController {
 
     }
 
+    // to get topic list by type
     @GetMapping("/{type}")
     public List<TOPIC_LIST> getTopicByType(@PathVariable("type") String type){
 
@@ -51,6 +53,7 @@ public class UserController {
 
     }
 
+    // to add a course
     @PostMapping("/addCourses")
     public String addCourses(@RequestBody List<Object> rows){
 
@@ -90,6 +93,7 @@ public class UserController {
 //
 //    }
 
+    // to process the login info
     @PostMapping("/loginInfo")
     public User loggingIN(@RequestBody LinkedHashMap<String,String> loginInfo){
 
@@ -109,6 +113,8 @@ public class UserController {
         }
 
     }
+
+    // to process forget password
     @PutMapping("/forget-password")
     public String forgetPassword(@RequestBody LinkedHashMap<String,String> body){
         User check = userService.isEmailExists(body.get("emailId"));
@@ -126,6 +132,8 @@ public class UserController {
         }
 
     }
+
+    // to add a new user
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody RegisterDto registerDto){
 

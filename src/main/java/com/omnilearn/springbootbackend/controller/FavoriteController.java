@@ -1,13 +1,11 @@
 package com.omnilearn.springbootbackend.controller;
 
 import com.omnilearn.springbootbackend.model.*;
-import com.omnilearn.springbootbackend.repository.PlateformCourseListRepository;
 import com.omnilearn.springbootbackend.service.FavouriteService;
 import com.omnilearn.springbootbackend.service.TopicService;
 import com.omnilearn.springbootbackend.service.UserService;
 import com.omnilearn.springbootbackend.service.YouTubeSearch;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 

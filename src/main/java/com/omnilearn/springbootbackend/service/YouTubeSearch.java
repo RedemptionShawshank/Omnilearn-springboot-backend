@@ -119,7 +119,6 @@ public class YouTubeSearch {
 //                            System.out.println("Likes: " + snippet.getLikeCount());
 //                            System.out.println("-----");
 //                        }
-                        System.out.println();
 
 //                        PLATFORM_COURSE_LIST platformCourseList = new PLATFORM_COURSE_LIST("Youtube", 0, affiliateLink, description, topicName, "assets/images_courses/web-development.png", "n/a");
 //                        plateformCourseListRepository.save(platformCourseList);
@@ -127,7 +126,7 @@ public class YouTubeSearch {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());;
         }
 
         return "added";

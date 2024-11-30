@@ -19,8 +19,9 @@ public class EmailUtils {
         MimeMessageHelper mimeMessageHelper=new MimeMessageHelper(mimeMessage);
         String emailBody = String.format("""
             <div>
-                <p>Hello,</p>
-                <p>Your OTP for verification is: <strong>%s</strong></p>
+                <p>Hello, Greetings from Omnilearn</p>
+                <p>Here is your OTP for verification : <strong>%s</strong></p>
+                <p>Keep Learning!! :) </p>
             </div>
             """, otp, email, otp);
         mimeMessageHelper.setTo(email);
