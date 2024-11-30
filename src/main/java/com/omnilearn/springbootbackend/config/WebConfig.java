@@ -10,7 +10,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**") // Allow all endpoints
-                .allowedOrigins("https://omnilearn.vercel.app") // Allow requests from this origin http://localhost:4200  https://omnilearn.vercel.app
+                .allowedOrigins("https://omnilearn.vercel.app") // Allow requests
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Allow these methods
                 .allowedHeaders("*") // Allow all headers
                 .allowCredentials(true); // Allow credentials (cookies, authorization headers, etc.)

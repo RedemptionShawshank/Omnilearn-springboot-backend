@@ -18,8 +18,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1")
-//@CrossOrigin(origins = "https://omnilearn.vercel.app")
-//@CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
 
     @Autowired
@@ -37,6 +35,7 @@ public class UserController {
     private FavouriteService favouriteService;
 
 
+    // to get topic list
     @GetMapping("/topic_list")
     public List<TOPIC_LIST> getTopicList(){
 
@@ -44,6 +43,8 @@ public class UserController {
 
     }
 
+
+    // to get topic names by the type
     @GetMapping("/{type}")
     public List<TOPIC_LIST> getTopicByType(@PathVariable("type") String type){
 
@@ -51,6 +52,7 @@ public class UserController {
 
     }
 
+    // add courses by admin users
     @PostMapping("/addCourses")
     public String addCourses(@RequestBody List<Object> rows){
 
@@ -59,37 +61,16 @@ public class UserController {
     }
 
 
-    @PostMapping("/path-variable")
+    // returns platform course list for a topics name received ------------
+    @GetMapping("/path-variable")
     public List<PLATFORM_COURSE_LIST> receiveImageName(@RequestBody String imageName) {
-        // Process the image name
+
         return topicService.getTopic(imageName);
 
-        // Do something with the image name (e.g., save to database)
-       // return "received";
     }
 
 
-
-
-    // rest api for getting user info from angular app and saving it into database
-//    @PostMapping("/userInfo")
-//    public String addUserInfo(@RequestBody User user){
-//        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-//        String hashedPassword = encoder.encode(user.getPassword());
-//        user.setPassword(hashedPassword);
-//
-//        User check= userService.isEmailExists(user.getEmailId());
-//
-//        if(check == null){
-//            userRepository.save(user);
-//            return "Account created successfully";
-//        }
-//        else{
-//            return "Account Already Exists";
-//        }
-//
-//    }
-
+    // to return user information
     @PostMapping("/loginInfo")
     public User loggingIN(@RequestBody LinkedHashMap<String,String> loginInfo){
 
@@ -109,6 +90,8 @@ public class UserController {
         }
 
     }
+
+    // to update the user password in case of forget password
     @PutMapping("/forget-password")
     public String forgetPassword(@RequestBody LinkedHashMap<String,String> body){
         User check = userService.isEmailExists(body.get("emailId"));
@@ -126,6 +109,8 @@ public class UserController {
         }
 
     }
+
+    // registering a user
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody RegisterDto registerDto){
 
@@ -140,8 +125,8 @@ public class UserController {
     }
 
 
+    // account verification using otp
     @PutMapping("/verify-account")
-//    ResponseEntity<String>
     public String verifyAccount(@RequestBody OTPverification otpverification){
 //        return new ResponseEntity<>(userService.verifyAccount(otpverification.getEmail(),otpverification.getOtp()),HttpStatus.OK);
         return userService.verifyAccount(otpverification.getEmail(),otpverification.getOtp());
@@ -153,6 +138,7 @@ public class UserController {
 //        return new ResponseEntity<>(userService.regenrateOtp(email),HttpStatus.OK);
     }
 
+    // to check whether a user exists or not using email address
     @GetMapping("/emailCheck/{emailId}")
     public boolean emailCheck(@PathVariable String emailId){
         User check = userService.isEmailExists(emailId);

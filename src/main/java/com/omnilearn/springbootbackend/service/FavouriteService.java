@@ -51,6 +51,8 @@ public class FavouriteService {
 
     @Transactional
     public void removeFavourite(Integer courseId){
+
         favoriteRepository.deleteBycourseId(courseId);
+
     }
 }

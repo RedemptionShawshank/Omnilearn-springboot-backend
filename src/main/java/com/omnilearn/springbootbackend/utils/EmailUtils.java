@@ -30,23 +30,4 @@ public class EmailUtils {
         javaMailSender.send(mimeMessage);
 
     }
-
-//    public void sendOtpEmail(String email,String otp) throws MessagingException{
-//        SimpleMailMessage message = new SimpleMailMessage();
-//        message.setFrom("omnilearn56@gmail.com"); // Ensure this matches your configured email address
-//        message.setTo(email);
-//        message.setSubject("verify Otp");
-//
-//        String emailBody = String.format("""
-//            <div>
-//                <p>Hello,</p>
-//                <p>Your OTP for verification is: <strong>%s</strong></p>
-//                <p>Please click the following link to verify your account:</p>
-//                <a href="http://localhost:8080/api/v1/verify-account?email=%s&otp=%s" target="_blank">Verify Account</a>
-//            </div>
-//            """, otp, email, otp);
-//
-//        message.setText(emailBody);
-//        javaMailSender.send(message);
-//    }
 }

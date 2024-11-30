@@ -28,13 +28,6 @@ public class TopicService {
     @Transactional
     public List<PLATFORM_COURSE_LIST> getTopic(String imageName){
 
-//        for(long i=1;i<=count;i++){
-//            PLATFORM_COURSE_LIST topic=plateformCourseListRepositoryImpl.getTopic(i);
-//            if(topic.getTopicName().equals(imageName))
-//            {
-//                topicArray.add(topic);
-//            }
-//        }
         return plateformCourseListRepository.getBytopicName(imageName);
     }
 
